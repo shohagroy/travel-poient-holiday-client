@@ -180,6 +180,28 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* subscribe section  */}
+      <div className="">
+        <div className="w-full bg-gray-500">
+          <div className="max-w-[800px] mx-auto  p-4 py-20">
+            <h1 className="text-5xl font-bold text-center text-gray-100">
+              Subcribe To More Update
+            </h1>
+
+            <div className="flex justify-center items-center my-5 w-full">
+              <input
+                type="text"
+                placeholder="example@email.com"
+                className="w-[500px] p-3 rounded-l-lg sm:w-2/3"
+              />
+              <button className="p-3 px-5 font-semibold rounded-r-lg bg-red-600 text-white">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
