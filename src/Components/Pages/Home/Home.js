@@ -157,14 +157,28 @@ const Home = () => {
       </div>
 
       {/* Winter offer section  */}
-      <div className=" relative">
-        <div className=" top-0 w-100 h-100 bg-gradient-to-r from-cyan-500 to-blue-500 z-20"></div>
-
+      <div className=" w-full relative">
         <img
-          className="absolute object-cover"
+          className=" object-cover h-[90vh]"
           src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/deals-1.jpg"
           alt=""
         />
+        <div className=" absolute top-0 w-full h-full bg-gradient-to-r from-blue-600/70 to-blue/0"></div>
+        <div className="absolute top-1/3 left-28 bg-white rounded-xl ">
+          <div className="p-10 w-[350px]">
+            <h1 className=" text-3xl font-bold">
+              Darjeeling, Jammu and Kashmir
+            </h1>
+            <p className="text-xl my-1 font bold font-sans text-red-600">
+              $250 <del className="mx-3">$350</del>
+            </p>
+            <p className="mb-2">6 Days 5 Night</p>
+            <p>Our Winter Offer Darjeeling, Jammu and Kashmir.</p>
+            <button className="w-full mt-5 py-3 text-white text-xl font-bold bg-red-600">
+              Book Now
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
