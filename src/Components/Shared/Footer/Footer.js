@@ -146,19 +146,19 @@ const Footer = () => {
                 <h3 className="text-xl font-bold p-1">Contacts</h3>
                 <p>
                   <span>
-                    <i class="fa-solid fa-phone"></i>
+                    <i className="fa-solid fa-phone"></i>
                   </span>
                   <span className="ml-1">01700-000001</span>
                 </p>
                 <p>
                   <span>
-                    <i class="fa-solid fa-envelope"></i>
+                    <i className="fa-solid fa-envelope"></i>
                   </span>
                   <span className="ml-1">shohagroy@yahoo.com</span>
                 </p>
                 <p>
                   <span>
-                    <i class="fa-solid fa-location-dot"></i>
+                    <i className="fa-solid fa-location-dot"></i>
                   </span>{" "}
                   <span className="ml-1">
                     2nd Floor, Saleha Plaza, GL Roy Road, Rangpur-5400

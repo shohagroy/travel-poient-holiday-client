@@ -11,7 +11,7 @@ const FacilityCard = ({ images, text }) => {
         />
         <div className="absolute top-[150px] left-[130px]">
           <div className="text-4xl flex text-[#ff3811] justify-center items-center h-[70px] w-[70px] bg-white border-2 border-red-600 rounded-full">
-            {/* <i class="fa-solid fa-people-roof"></i> */}
+            {/* <i className="fa-solid fa-people-roof"></i> */}
             <img src="https://i.ibb.co/RPLwWPN/favicon.png" alt="" />
           </div>
         </div>

@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthProvaider } from "../../GlobalContext/GobalContext";
 
 const Navigation = () => {
   const [menu, setMenu] = useState(false);
+
+  const { user } = useContext(AuthProvaider);
+
   return (
     <div className="relative">
       <nav className="max-w-[1200px] mx-auto p-2 flex justify-between items-center relative">
@@ -20,7 +24,9 @@ const Navigation = () => {
             </NavLink>
             <NavLink className={`p-2 mx-2`}>Shop</NavLink>
             <NavLink className={`p-2 mx-2`}>About</NavLink>
-            <NavLink className={`p-2 mx-2`}>Contact</NavLink>
+            <NavLink to="login" className={`p-2 mx-2`}>
+              Login
+            </NavLink>
           </div>
 
           {/* menu button (hamburgar) */}

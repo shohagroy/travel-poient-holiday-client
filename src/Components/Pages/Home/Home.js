@@ -113,11 +113,11 @@ const Home = () => {
                         className="block object-cover object-center w-full rounded-md h-72 bg-gray-500"
                       />
                       <div className="flex items-center text-xl py-2">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
+                        <i className="fa-regular fa-star"></i>
+                        <i className="fa-regular fa-star"></i>
+                        <i className="fa-regular fa-star"></i>
+                        <i className="fa-regular fa-star"></i>
+                        <i className="fa-regular fa-star"></i>
                       </div>
                       <div className="text-xl font-bold flex justify-between items-center">
                         <p>Thailand</p>
