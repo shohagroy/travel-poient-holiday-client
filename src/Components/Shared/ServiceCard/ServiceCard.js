@@ -1,8 +1,11 @@
 import React from "react";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
   return (
-    <div className=" p-4 shadow-md h-[650px] relative bg-white text-gray-900">
+    <div className=" p-4 my-5 shadow-md h-[650px] relative bg-white text-gray-900">
       <div className="flex justify-between pb-4 border-bottom">
         <div className="flex space-x-4">
           <img
@@ -20,11 +23,16 @@ const ServiceCard = ({ service }) => {
       </div>
       <div className="space-y-4">
         <div className="space-y-2">
-          <img
-            src="https://source.unsplash.com/random/480x360/?4"
-            alt=""
-            className="block object-cover object-center w-full rounded-md h-72 bg-gray-500"
-          />
+          <PhotoProvider maskOpacity={0.5}>
+            <PhotoView>
+              <img
+                src={service?.image}
+                alt=""
+                className="block object-cover object-center w-full rounded-md h-72 bg-gray-500"
+              />
+            </PhotoView>
+          </PhotoProvider>
+
           <div className="flex items-center text-xl py-2">
             <i className="fa-solid text-yellow-500 fa-star"></i>
             <i className="fa-solid text-yellow-500 fa-star"></i>
@@ -48,12 +56,13 @@ const ServiceCard = ({ service }) => {
           <p className="leading-snug capitalize text-gray-400">
             {service?.details.slice(0, 100)}
           </p>
-        </div>
-
-        <div>
-          <button className="w-full absolute bottom-0 left-0 py-5 text-white font-bold text-xl bg-red-600">
-            See Details
-          </button>
+          <div>
+            <Link to={`/services/${service?._id}`}>
+              <button className="w-full absolute bottom-0 left-0 py-5 text-white font-bold text-xl bg-red-600">
+                See Details
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

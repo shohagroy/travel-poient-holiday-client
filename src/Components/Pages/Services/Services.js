@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import ServiceCard from "../../Shared/ServiceCard/ServiceCard";
 
 const Services = () => {
@@ -38,7 +38,10 @@ const Services = () => {
               </div>
             </div>
             <div className="my-10 text-center">
-              <button className="py-3 px-6 bg-red-600 font-semibold text-xl text-white ">
+              <button
+                onClick={() => console.log("button click")}
+                className="py-3 px-6 bg-red-600 font-semibold text-xl text-white "
+              >
                 See All Services
               </button>
             </div>

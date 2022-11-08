@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ServiceCard from "../../Shared/ServiceCard/ServiceCard";
 import FacilityCard from "./FacilityCard";
 
@@ -100,9 +101,11 @@ const Home = () => {
             </div>
 
             <div className="my-10 text-center">
-              <button className="py-3 px-6 bg-red-600 font-semibold text-xl text-white ">
-                See All Services
-              </button>
+              <Link to="/services">
+                <button className="py-3 px-6 bg-red-600 font-semibold text-xl text-white ">
+                  See All Services
+                </button>
+              </Link>
             </div>
           </div>
         </div>

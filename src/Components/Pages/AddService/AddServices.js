@@ -92,12 +92,13 @@ const AddServices = () => {
                         />
                       </div>
                       <div className="col-span-full">
-                        <label className="text-sm">Location</label>
+                        <label className="text-sm">Photo URL</label>
                         <input
                           onBlur={addServiceBlur}
-                          name="location"
+                          required
+                          name="image"
                           type="text"
-                          placeholder="Location"
+                          placeholder="Photo URL"
                           className="w-full text-lg p-2 pl-5 rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 border-gray-700 text-gray-900"
                         />
                       </div>
