@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 import swal from "sweetalert";
 import ReviewCard from "./ReviewCard";
@@ -142,7 +142,25 @@ const ServicesDetalis = () => {
               <h3 className="text-3xl text-red-600 font-bold text-center py-10">
                 Review Section
               </h3>
-              <div className="flex flex-col mx-3 justify-center p-8 shadow-sm rounded-xl lg:p-12 bg-gray-200 text-gray-900">
+
+              <div
+                className={` ${!user.email ? " block" : "hidden"} text-center  
+                `}
+              >
+                <p className="text-4xl font-bold text-[#ff3811] font-serif">
+                  Please Login <br /> and Review This Service
+                </p>
+                <Link to="/wlkflogin">
+                  <button className="my-10 py-3 px-8 text-3xl font-bold text-white rounded-md bg-[#ff3811]">
+                    Login hare
+                  </button>
+                </Link>
+              </div>
+              <div
+                className={` ${
+                  user.email ? " block" : "hidden"
+                } flex  flex-col mx-3 justify-center p-8 shadow-sm rounded-xl lg:p-12 bg-gray-200 text-gray-900`}
+              >
                 <div className="flex flex-col items-center w-full">
                   <h2 className="text-3xl font-semibold text-center">
                     Your opinion matters!

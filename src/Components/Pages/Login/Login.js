@@ -1,9 +1,14 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 
 const Login = () => {
   const { userLogin } = useContext(AuthProvaider);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const path = location.state?.path?.pathname || "/";
 
   const userLoginHandelar = (event) => {
     event.preventDefault();
@@ -12,12 +17,9 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
-
     userLogin(email, password)
       .then(() => {
-        // Profile updated!
-        // ...
+        navigate(path, { relative: true });
       })
       .catch((error) => console.error(error));
   };

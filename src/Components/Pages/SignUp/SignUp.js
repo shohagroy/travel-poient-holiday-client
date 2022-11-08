@@ -1,9 +1,14 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 
 const SignUp = () => {
   const { createUserWithEmail, userProfileUpdate } = useContext(AuthProvaider);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const path = location.state?.path?.pathname || "/";
 
   const createUserHandelar = (event) => {
     event.preventDefault();
@@ -18,6 +23,7 @@ const SignUp = () => {
       // Signed in
       const user = result.user;
       if (user) {
+        navigate(path, { relative: true });
         userProfileUpdate(name, photoUrl);
       }
     });

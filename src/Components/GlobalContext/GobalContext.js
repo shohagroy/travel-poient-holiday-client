@@ -72,6 +72,7 @@ const GobalContext = ({ children }) => {
     userProfileUpdate,
     userLogin,
     userSignOut,
+    loading,
   };
   return (
     <AuthProvaider.Provider value={authInfo}>{children}</AuthProvaider.Provider>
