@@ -6,16 +6,23 @@ import swal from "sweetalert";
 const MyReview = () => {
   const [myReview, setMyReview] = useState([]);
   const [deleted, setDeleted] = useState(false);
+  const [userReating, setUserReating] = useState(0);
+  const [update, setUpdate] = useState(false);
+  const [deleteReviewId, setDeleteReviewId] = useState("");
+  const [defoultReview, setDefoultReview] = useState("");
 
   const { user } = useContext(AuthProvaider);
+
+  console.log(defoultReview);
 
   useEffect(() => {
     fetch(`http://localhost:5000/my-reviews?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setMyReview(data));
-  }, [deleted]);
+  }, [deleted, update]);
 
-  const reviewUpdateHandelar = (id) => {
+  const reviewUpdateHandelar = (id, reating, review) => {
+    setDeleteReviewId("");
     swal({
       title: "Are you sure?",
       text: "Update This Review!",
@@ -24,22 +31,50 @@ const MyReview = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/my-reviews?_id=${id}`, {
-          method: "PUT",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount === 1) {
-              setDeleted(true);
-              swal("Done! Your Order has been deleted!", {
-                icon: "success",
-              });
-            }
-          });
+        setUpdate(true);
+        setUserReating(reating);
+        setDeleteReviewId(id);
+        setDefoultReview(review);
+        // swal("Done! Your Order has been deleted!", {
+        //   icon: "success",
+        // });
       } else {
         swal("Your Order is safe!");
       }
     });
+  };
+
+  const updateReviewOnSubmit = (event) => {
+    event.preventDefault();
+
+    const review = event.target.reviewText.value;
+
+    const updateReview = {
+      review: review,
+      userReating: userReating,
+    };
+
+    fetch(`http://localhost:5000/my-reviews?_id=${deleteReviewId}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateReview),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setDefoultReview("");
+        if (data.matchedCount >= 1) {
+          swal("Done! Your Review has been Updated!", {
+            icon: "success",
+          });
+          event.target.reset();
+          setUpdate(false);
+        }
+      });
+
+    console.log(updateReview);
   };
 
   const reviewDeletedHandalar = (id) => {
@@ -70,7 +105,7 @@ const MyReview = () => {
   };
 
   return (
-    <div>
+    <div className="relative">
       <div className="h-[400px] relative">
         <img
           className="object-cover w-full h-full object-contain"
@@ -129,7 +164,13 @@ const MyReview = () => {
                     </div>
                     <div className="flex flex-col font-bold">
                       <button
-                        onClick={() => reviewUpdateHandelar(review._id)}
+                        onClick={() => {
+                          return reviewUpdateHandelar(
+                            review._id,
+                            review.userReating,
+                            review.review
+                          );
+                        }}
                         className="text-[20px] py-2 px-6 m-1 text-white rounded-xl bg-yellow-400"
                       >
                         Update
@@ -142,6 +183,72 @@ const MyReview = () => {
                         Deleted
                       </button>
                     </div>
+
+                    {/* update section  */}
+                    <div
+                      className={`bg-white/70 w-full h-full py-10   top-0 left-0 ${
+                        update ? "absolute " : " hidden"
+                      } `}
+                    >
+                      <h3 className="text-3xl text-red-600 font-bold text-center py-10">
+                        Review Update Section
+                      </h3>
+                      <div className="flex flex-col items-center  mx-auto justify-center p-8 shadow-sm rounded-xl lg:p-12 md:w-[50%] bg-white border text-gray-900">
+                        <div className="flex flex-col items-center w-full">
+                          <h2 className="text-3xl font-semibold text-center">
+                            Your opinion matters!
+                          </h2>
+                          <div className="flex flex-col items-center py-6 space-y-3">
+                            <span className="text-center">
+                              How was your experience?
+                            </span>
+                            <div className="flex space-x-3">
+                              {[...Array(5).keys()].map((number) => (
+                                <button
+                                  key={number}
+                                  onClick={() => setUserReating(number + 1)}
+                                >
+                                  <i
+                                    className={`fa-solid text-4xl ${
+                                      userReating > number
+                                        ? "text-yellow-500"
+                                        : ""
+                                    }  fa-star`}
+                                  ></i>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          <form
+                            onSubmit={updateReviewOnSubmit}
+                            className="flex flex-col w-full"
+                          >
+                            <textarea
+                              name="reviewText"
+                              rows="3"
+                              placeholder="Message..."
+                              defaultValue={defoultReview}
+                              className="p-4 rounded-md border-2 border-black resize-none text-gray-900 bg-white"
+                            ></textarea>
+                            <button
+                              type="submit"
+                              className="py-4 my-8 font-semibold rounded-md text-white bg-red-600"
+                            >
+                              Update feedback
+                            </button>
+                          </form>
+                        </div>
+                        <div className="flex items-center justify-center">
+                          <button
+                            onClick={() => setUpdate(false)}
+                            className="text-xl text-gray-400"
+                          >
+                            Maybe later
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    {/* UPDATE SECTION EXET */}
                   </div>
                 ))}
               </div>
