@@ -1,29 +1,73 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
+import swal from "sweetalert";
 
 const MyReview = () => {
   const [myReview, setMyReview] = useState([]);
+  const [deleted, setDeleted] = useState(false);
 
   const { user } = useContext(AuthProvaider);
 
-  console.log(myReview);
-
-  const reviewDeletedHandalar = (id) => {
-    fetch(`http://localhost:5000/my-review?_id=${id}}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-
-    console.log(id);
-  };
-
   useEffect(() => {
-    fetch(`http://localhost:5000/my-review?email=${user.email}`)
+    fetch(`http://localhost:5000/my-reviews?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setMyReview(data));
-  }, [user.email]);
+  }, [deleted]);
+
+  const reviewUpdateHandelar = (id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Update This Review!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        fetch(`http://localhost:5000/my-reviews?_id=${id}`, {
+          method: "PUT",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount === 1) {
+              setDeleted(true);
+              swal("Done! Your Order has been deleted!", {
+                icon: "success",
+              });
+            }
+          });
+      } else {
+        swal("Your Order is safe!");
+      }
+    });
+  };
+
+  const reviewDeletedHandalar = (id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Deleted This Review!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        fetch(`http://localhost:5000/my-reviews?_id=${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount === 1) {
+              setDeleted(true);
+              swal("Done! Your Order has been deleted!", {
+                icon: "success",
+              });
+            }
+          });
+      } else {
+        swal("Your Order is safe!");
+      }
+    });
+  };
 
   return (
     <div>
@@ -84,8 +128,11 @@ const MyReview = () => {
                       </div>
                     </div>
                     <div className="flex flex-col font-bold">
-                      <button className="text-[20px] py-2 px-6 m-1 text-white rounded-xl bg-yellow-400">
-                        Pending
+                      <button
+                        onClick={() => reviewUpdateHandelar(review._id)}
+                        className="text-[20px] py-2 px-6 m-1 text-white rounded-xl bg-yellow-400"
+                      >
+                        Update
                       </button>
 
                       <button
