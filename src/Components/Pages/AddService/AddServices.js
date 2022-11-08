@@ -13,7 +13,12 @@ const AddServices = () => {
     const value = event.target.value;
 
     addService[name] = value;
-    setAddService({ ...addService, photoURL: user?.photoURL });
+    setAddService({
+      ...addService,
+      photoURL: user?.photoURL,
+      publish: new Date().toLocaleString() + " ",
+      author: user?.displayName,
+    });
   };
 
   const addServiceHandelar = (event) => {
@@ -29,7 +34,6 @@ const AddServices = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged && data.insertedId) {
-          console.log(data);
           swal({
             title: "Successful!",
             text: "Your New Service Added!",
@@ -37,6 +41,7 @@ const AddServices = () => {
             button: "Ok",
           });
           setAddService({});
+          event.target.reset();
         }
       });
   };
@@ -151,7 +156,7 @@ const AddServices = () => {
                               name="author"
                               type="text"
                               readOnly
-                              defaultValue={user?.displayName}
+                              value={user?.displayName}
                               className="w-full text-lg p-2 pl-5 rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 border-gray-700 text-gray-900"
                             />
                           </div>
@@ -165,7 +170,7 @@ const AddServices = () => {
                               onBlur={addServiceBlur}
                               name="publish"
                               type="text"
-                              defaultValue={new Date().toLocaleString() + ""}
+                              value={new Date().toLocaleString() + " "}
                               readOnly
                               placeholder="date"
                               className="w-full text-lg p-2 pl-5 rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 border-gray-700 text-gray-900"
@@ -194,7 +199,7 @@ const AddServices = () => {
                             type="submit"
                             className="px-4 py-2 border rounded-md border-gray-100"
                           >
-                            Add New Service
+                            Add Service
                           </button>
                         </div>
                       </div>

@@ -53,8 +53,8 @@ const ServiceCard = ({ service }) => {
               {service?.tittle}
             </h3>
           </a>
-          <p className="leading-snug capitalize text-gray-400">
-            {service?.details.slice(0, 100)}
+          <p className="leading-snug font-sans capitalize text-gray-400">
+            {service?.details.slice(0, 80)}...
           </p>
           <div>
             <Link to={`/services/${service?._id}`}>

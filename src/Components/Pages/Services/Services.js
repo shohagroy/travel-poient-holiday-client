@@ -29,6 +29,9 @@ const Services = () => {
             </p>
 
             <div>
+              <h3 className="text-3xl font-semibold text-gray-600 text-center">
+                Toral Service: {services.length}
+              </h3>
               <div className="grid grid-cols-3  my-10 gap-2">
                 {/* card  */}
 
