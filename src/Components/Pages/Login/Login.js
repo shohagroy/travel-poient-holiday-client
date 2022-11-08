@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthProvaider } from "../../GlobalContext/GobalContext";
 
 const Login = () => {
+  const { userLogin } = useContext(AuthProvaider);
+
+  const userLoginHandelar = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(email, password);
+
+    userLogin(email, password)
+      .then(() => {
+        // Profile updated!
+        // ...
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-md p-4  sm:p-8 text-gray-900">
@@ -9,12 +29,13 @@ const Login = () => {
           Login to your account
         </h2>
 
-        <form className="space-y-8 ng-untouched ng-pristine ng-valid">
+        <form
+          onSubmit={userLoginHandelar}
+          className="space-y-8 ng-untouched ng-pristine ng-valid"
+        >
           <div className="space-y-4">
             <div className="space-y-2">
-              <label for="email" className="block text-sm">
-                Email address
-              </label>
+              <label className="block text-sm">Email address</label>
               <input
                 type="email"
                 name="email"
@@ -24,9 +45,7 @@ const Login = () => {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <label for="password" className="text-sm">
-                  Password
-                </label>
+                <label className="text-sm">Password</label>
                 <a href="#" className="text-xs hover:underline text-gray-400">
                   Forgot password?
                 </a>
@@ -40,7 +59,7 @@ const Login = () => {
             </div>
           </div>
           <button
-            type="button"
+            type="submit"
             className="w-full px-8 py-3 font-semibold rounded-md bg-violet-400 text-gray-900"
           >
             Sign in

@@ -1,4 +1,4 @@
-import React, { Children, createContext, useState } from "react";
+import React, { Children, createContext, useEffect, useState } from "react";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -23,7 +23,56 @@ const GobalContext = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const authInfo = { user, createUserWithEmail };
+  //   user update
+  const userProfileUpdate = (userName, photoUrl) => {
+    return updateProfile(auth.currentUser, {
+      displayName: userName,
+      photoURL: photoUrl,
+    });
+  };
+
+  // user Login
+  const userLogin = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  // user log out
+  const userSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setUser("");
+        localStorage.removeItem("genius_token");
+      })
+      .catch((error) => {
+        console.error(error);
+        setUser("");
+      });
+
+    setLoading(false);
+  };
+
+  // current user
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      }
+      setLoading(false);
+    });
+
+    return () => {
+      unSubscribe();
+    };
+  }, []);
+
+  const authInfo = {
+    user,
+    createUserWithEmail,
+    userProfileUpdate,
+    userLogin,
+    userSignOut,
+  };
   return (
     <AuthProvaider.Provider value={authInfo}>{children}</AuthProvaider.Provider>
   );

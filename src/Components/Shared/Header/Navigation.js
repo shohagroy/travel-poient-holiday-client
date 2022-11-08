@@ -5,7 +5,9 @@ import { AuthProvaider } from "../../GlobalContext/GobalContext";
 const Navigation = () => {
   const [menu, setMenu] = useState(false);
 
-  const { user } = useContext(AuthProvaider);
+  const { user, userSignOut } = useContext(AuthProvaider);
+
+  console.log(user);
 
   return (
     <div className="relative">
@@ -22,11 +24,37 @@ const Navigation = () => {
             <NavLink className={`p-2 mx-2`} to="/">
               Home
             </NavLink>
-            <NavLink className={`p-2 mx-2`}>Shop</NavLink>
-            <NavLink className={`p-2 mx-2`}>About</NavLink>
-            <NavLink to="login" className={`p-2 mx-2`}>
+            <NavLink to="/services" className={`p-2 mx-2`}>
+              Services
+            </NavLink>
+            <NavLink
+              to="/add-service"
+              className={`p-2 mx-2 ${!user.email ? "hidden" : "inline"}`}
+            >
+              Add Service
+            </NavLink>
+            <NavLink
+              to="/my-review"
+              className={`p-2 mx-2 ${!user.email ? "hidden" : "inline"}`}
+            >
+              My Review
+            </NavLink>
+            <NavLink to="/blog" className={`p-2 mx-2`}>
+              Blog
+            </NavLink>
+
+            <NavLink
+              to="/login"
+              className={`p-2 mx-2 ${user.email ? "hidden" : "inline"}`}
+            >
               Login
             </NavLink>
+            <button
+              onClick={userSignOut}
+              className={`p-2 mx-2 ${!user.email ? "hidden" : "inline"}`}
+            >
+              Log Out
+            </button>
           </div>
 
           {/* menu button (hamburgar) */}

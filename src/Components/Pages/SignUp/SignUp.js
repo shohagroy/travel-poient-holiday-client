@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthProvaider } from "../../GlobalContext/GobalContext";
 
 const SignUp = () => {
+  const { createUserWithEmail, userProfileUpdate } = useContext(AuthProvaider);
+
+  const createUserHandelar = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const name = form.name.value;
+    const photoUrl = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    createUserWithEmail(email, password).then((result) => {
+      // Signed in
+      const user = result.user;
+      if (user) {
+        userProfileUpdate(name, photoUrl);
+      }
+    });
+
+    console.log(name, photoUrl, email, password);
+  };
+
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-md p-4  sm:p-8 text-gray-900">
         <h2 className="mb-5 text-3xl font-bold text-center">Sign Up</h2>
 
-        <form className="space-y-8 ng-untouched ng-pristine ng-valid">
+        <form
+          onSubmit={createUserHandelar}
+          className="space-y-8 ng-untouched ng-pristine ng-valid"
+        >
           <div className="space-y-4">
             <div className="space-y-2">
               <label for="name" className="block text-sm">
@@ -16,7 +42,20 @@ const SignUp = () => {
               <input
                 type="text"
                 name="name"
+                required
                 placeholder="Your Name"
+                className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-200 text-gray-900"
+              />
+            </div>
+            <div className="space-y-2">
+              <label for="photo" className="block text-sm">
+                Photo Url
+              </label>
+              <input
+                type="text"
+                name="photo"
+                required
+                placeholder="Photo Url"
                 className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-200 text-gray-900"
               />
             </div>
@@ -27,6 +66,7 @@ const SignUp = () => {
               <input
                 type="email"
                 name="email"
+                required
                 placeholder="leroy@jenkins.com"
                 className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-200 text-gray-900"
               />
@@ -40,13 +80,14 @@ const SignUp = () => {
               <input
                 type="password"
                 name="password"
+                required
                 placeholder="*****"
                 className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-200 text-gray-900 focus:border-violet-400"
               />
             </div>
           </div>
           <button
-            type="button"
+            type="submit"
             className="w-full px-8 py-3 font-semibold rounded-md bg-violet-400 text-gray-900"
           >
             Sign Up
