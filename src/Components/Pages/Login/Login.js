@@ -1,9 +1,10 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 
 const Login = () => {
-  const { userLogin } = useContext(AuthProvaider);
+  const { userLogin, googleSignIn } = useContext(AuthProvaider);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ const Login = () => {
 
   const userLoginHandelar = (event) => {
     event.preventDefault();
-
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
@@ -22,6 +22,17 @@ const Login = () => {
         navigate(path, { relative: true });
       })
       .catch((error) => console.error(error));
+  };
+
+  const provaider = new GoogleAuthProvider();
+  const googleLoginHandelar = () => {
+    googleSignIn(provaider)
+      .then((res) => {
+        navigate(path, { relative: true });
+      })
+      .catch((error) => {
+        // setLoginError(error.code)
+      });
   };
 
   return (
@@ -83,6 +94,7 @@ const Login = () => {
 
         <div className="my-6 space-y-4">
           <button
+            onClick={googleLoginHandelar}
             aria-label="Login with Google"
             type="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-400 focus:ring-violet-400"

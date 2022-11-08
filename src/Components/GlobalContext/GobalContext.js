@@ -6,6 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  signInWithPopup,
 } from "firebase/auth";
 import app from "../Firebase/Firebase.config";
 
@@ -52,6 +53,11 @@ const GobalContext = ({ children }) => {
     setLoading(false);
   };
 
+  const googleSignIn = (provider) => {
+    setLoading(true);
+    return signInWithPopup(auth, provider);
+  };
+
   // current user
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -72,6 +78,7 @@ const GobalContext = ({ children }) => {
     userProfileUpdate,
     userLogin,
     userSignOut,
+    googleSignIn,
     loading,
   };
   return (
