@@ -106,7 +106,7 @@ const AddServices = () => {
                         <input
                           onBlur={addServiceBlur}
                           name="duration"
-                          type="text"
+                          type="number"
                           placeholder="Duration (Day)"
                           className="w-full text-lg p-2 pl-5 rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 border-gray-700 text-gray-900"
                         />

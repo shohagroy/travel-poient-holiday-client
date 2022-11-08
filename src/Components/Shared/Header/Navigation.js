@@ -7,8 +7,6 @@ const Navigation = () => {
 
   const { user, userSignOut } = useContext(AuthProvaider);
 
-  console.log(user);
-
   return (
     <div className="relative">
       <nav className="max-w-[1200px] mx-auto p-2 flex justify-between items-center relative">
