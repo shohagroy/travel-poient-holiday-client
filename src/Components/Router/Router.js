@@ -32,7 +32,10 @@ export const router = createBrowserRouter([
       },
 
       { path: "/add-service", element: <AddServices /> },
-      { path: "/my-review", element: <MyReview /> },
+      {
+        path: "/my-review",
+        element: <MyReview />,
+      },
     ],
   },
 ]);

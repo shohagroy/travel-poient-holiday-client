@@ -24,6 +24,7 @@ const ServicesDetalis = () => {
       user,
       services,
       postID: services._id,
+      email: user.email,
     };
 
     fetch("http://localhost:5000/review", {
