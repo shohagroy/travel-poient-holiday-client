@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
+import swal from "sweetalert";
 
 const AddServices = () => {
   const { user } = useContext(AuthProvaider);
@@ -11,26 +12,33 @@ const AddServices = () => {
     const name = event.target.name;
     const value = event.target.value;
 
-    console.log(addService);
-
     addService[name] = value;
+    setAddService({ ...addService, photoURL: user?.photoURL });
   };
 
   const addServiceHandelar = (event) => {
     event.preventDefault();
 
-    console.log(addService);
-    // const form = event.target;
-    // const serviceTittle = form.tittle.value;
-    // const serviceCategory = form.category.value;
-    // const address = form.address.value;
-    // const state = form.state.value;
-    // const city = form.city.value;
-    // const courseCategory = form.category.value;
-    // const courseName = form.courseName.value;
-
-    // localStorage.setItem("enrollCourse", JSON.stringify(userDetails));
-    setAddService({});
+    fetch("http://localhost:5000/service", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(addService),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged && data.insertedId) {
+          console.log(data);
+          swal({
+            title: "Successful!",
+            text: "Your New Service Added!",
+            icon: "success",
+            button: "Ok",
+          });
+          setAddService({});
+        }
+      });
   };
 
   return (
