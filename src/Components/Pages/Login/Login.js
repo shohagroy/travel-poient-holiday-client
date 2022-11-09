@@ -1,10 +1,10 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { json, Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 
 const Login = () => {
-  const { userLogin, googleSignIn } = useContext(AuthProvaider);
+  const { userLogin, googleSignIn, getJWTAccess } = useContext(AuthProvaider);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,8 +18,32 @@ const Login = () => {
     const password = form.password.value;
 
     userLogin(email, password)
-      .then(() => {
-        navigate(path, { relative: true });
+      .then((result) => {
+        const user = result.user;
+
+        if (user.email) {
+          const currentUser = {
+            email: user.email,
+          };
+          fetch("http://localhost:5000/jwt", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ currentUser }),
+          })
+            .then((res) => {
+              console.log(res);
+              return res.json();
+            })
+            .then((data) => {
+              localStorage.setItem(
+                "travel_point_token",
+                JSON.stringify(data.token)
+              );
+              navigate(path, { relative: true });
+            });
+        }
       })
       .catch((error) => console.error(error));
   };
@@ -28,7 +52,31 @@ const Login = () => {
   const googleLoginHandelar = () => {
     googleSignIn(provaider)
       .then((res) => {
-        navigate(path, { relative: true });
+        const user = res.user;
+
+        if (user.email) {
+          const currentUser = {
+            email: user.email,
+          };
+          fetch("http://localhost:5000/jwt", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(currentUser),
+          })
+            .then((res) => {
+              console.log(res);
+              return res.json();
+            })
+            .then((data) => {
+              localStorage.setItem(
+                "travel_point_token",
+                JSON.stringify(data.token)
+              );
+              navigate(path, { relative: true });
+            });
+        }
       })
       .catch((error) => {
         // setLoginError(error.code)

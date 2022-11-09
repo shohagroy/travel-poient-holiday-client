@@ -72,6 +72,8 @@ const GobalContext = ({ children }) => {
     };
   }, []);
 
+  const getJWTAccess = (userEmail) => {};
+
   const authInfo = {
     user,
     createUserWithEmail,
@@ -80,6 +82,7 @@ const GobalContext = ({ children }) => {
     userSignOut,
     googleSignIn,
     loading,
+    getJWTAccess,
   };
   return (
     <AuthProvaider.Provider value={authInfo}>{children}</AuthProvaider.Provider>

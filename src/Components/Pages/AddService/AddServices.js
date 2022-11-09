@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 const AddServices = () => {
   const { user } = useContext(AuthProvaider);
@@ -18,6 +19,7 @@ const AddServices = () => {
       photoURL: user?.photoURL,
       publish: new Date().toLocaleString() + " ",
       author: user?.displayName,
+      authorEmail: user?.email,
     });
   };
 
@@ -28,10 +30,15 @@ const AddServices = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("travel_point_token")}`,
       },
       body: JSON.stringify(addService),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json();
+
+        console.log(res);
+      })
       .then((data) => {
         if (data.acknowledged && data.insertedId) {
           swal({
@@ -62,6 +69,14 @@ const AddServices = () => {
             <p className=" text-center text-[#ff3811] mb-10 text-5xl font-bold">
               Add New Service
             </p>
+
+            <div className="text-center">
+              <Link to="/my-services" className="text-center">
+                <button className=" text-3xl py-3 bg-red-600 text-white font-bold rounded-xl px-8">
+                  My Service
+                </button>
+              </Link>
+            </div>
 
             <div className="my-10">
               {/* add service from  */}
