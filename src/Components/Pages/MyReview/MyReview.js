@@ -10,19 +10,29 @@ const MyReview = () => {
   const [deleted, setDeleted] = useState(false);
   const [userReating, setUserReating] = useState(0);
   const [update, setUpdate] = useState(false);
-  const [deleteReviewId, setDeleteReviewId] = useState("");
+  const [updateReviewId, setUpdateReviewId] = useState({});
   const [defoultReview, setDefoultReview] = useState("");
 
-  const { user } = useContext(AuthProvaider);
+  const { user, userSignOut } = useContext(AuthProvaider);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/my-reviews?email=${user.email}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/my-reviews?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("travel_point_token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          userSignOut();
+        }
+        return res.json();
+      })
       .then((data) => setMyReview(data));
   }, [deleted, update]);
 
-  const reviewUpdateHandelar = (id, reating, review) => {
-    setDeleteReviewId("");
+  const reviewUpdateHandelar = (review) => {
+    console.log(review);
+    setUpdateReviewId("");
     swal({
       title: "Are you sure?",
       text: "Update This Review!",
@@ -32,9 +42,9 @@ const MyReview = () => {
     }).then((willDelete) => {
       if (willDelete) {
         setUpdate(true);
-        setUserReating(reating);
-        setDeleteReviewId(id);
-        setDefoultReview(review);
+        setUserReating(review.userReating);
+        setUpdateReviewId({ id: review._id, email: review.email });
+        setDefoultReview(review.review);
       } else {
         swal("Your Order is safe!");
       }
@@ -51,14 +61,23 @@ const MyReview = () => {
       userReating: userReating,
     };
 
-    fetch(`http://localhost:5000/my-reviews?_id=${deleteReviewId}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateReview),
-    })
-      .then((res) => res.json())
+    fetch(
+      `http://localhost:5000/my-reviews?_id=${updateReviewId.id}&email=${updateReviewId.email}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("travel_point_token")}`,
+        },
+        body: JSON.stringify(updateReview),
+      }
+    )
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          userSignOut();
+        }
+        return res.json();
+      })
       .then((data) => {
         setDefoultReview("");
         if (data.matchedCount >= 1) {
@@ -71,7 +90,7 @@ const MyReview = () => {
       });
   };
 
-  const reviewDeletedHandalar = (id) => {
+  const reviewDeletedHandalar = (id, email) => {
     swal({
       title: "Are you sure?",
       text: "Deleted This Review!",
@@ -80,10 +99,21 @@ const MyReview = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/my-reviews?_id=${id}`, {
+        fetch(`http://localhost:5000/my-reviews?_id=${id}&email=${email}`, {
           method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem(
+              "travel_point_token"
+            )}`,
+          },
         })
-          .then((res) => res.json())
+          .then((res) => {
+            if (res.status === 401 || res.status === 403) {
+              userSignOut();
+            }
+            return res.json();
+          })
           .then((data) => {
             if (data.deletedCount === 1) {
               setDeleted(true);
@@ -169,11 +199,7 @@ const MyReview = () => {
                     <div className="flex flex-col font-bold">
                       <button
                         onClick={() => {
-                          return reviewUpdateHandelar(
-                            review._id,
-                            review.userReating,
-                            review.review
-                          );
+                          return reviewUpdateHandelar(review);
                         }}
                         className="text-[20px] py-2 px-6 m-1 text-white rounded-xl bg-yellow-400"
                       >
@@ -181,7 +207,9 @@ const MyReview = () => {
                       </button>
 
                       <button
-                        onClick={() => reviewDeletedHandalar(review._id)}
+                        onClick={() =>
+                          reviewDeletedHandalar(review._id, review.email)
+                        }
                         className="text-[20px] py-2 px-6 m-1 text-white rounded-xl bg-[#ff3811]"
                       >
                         Deleted

@@ -8,21 +8,28 @@ import { Helmet } from "react-helmet";
 const MyServices = () => {
   const [myService, setMyService] = useState([]);
   const [deleted, setDeleted] = useState(false);
-  //   const [deletedServicesID, setDeletedServiceID] = useState("");
-  //   const [defoultReview, setDefoultReview] = useState("");
 
-  const { user } = useContext(AuthProvaider);
+  const { user, userSignOut } = useContext(AuthProvaider);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/my-services?email=${user.email}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/my-services?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("travel_point_token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          userSignOut();
+        }
+        return res.json();
+      })
       .then((data) => {
         setMyService(data);
         console.log(data);
       });
   }, [deleted]);
 
-  const serviceDeletedHandelar = (id) => {
+  const serviceDeletedHandelar = (id, email) => {
     swal({
       title: "Are you sure?",
       text: "Deleted This Service!",
@@ -31,10 +38,20 @@ const MyServices = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/my-services?_id=${id}`, {
+        fetch(`http://localhost:5000/my-services?_id=${id}&email=${email}`, {
           method: "DELETE",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem(
+              "travel_point_token"
+            )}`,
+          },
         })
-          .then((res) => res.json())
+          .then((res) => {
+            if (res.status === 401 || res.status === 403) {
+              userSignOut();
+            }
+            return res.json();
+          })
           .then((data) => {
             if (data.deletedCount === 1) {
               setDeleted(true);
@@ -118,7 +135,12 @@ const MyServices = () => {
                     </div>
                     <div className="flex flex-col font-bold">
                       <button
-                        onClick={() => serviceDeletedHandelar(service._id)}
+                        onClick={() =>
+                          serviceDeletedHandelar(
+                            service._id,
+                            service.authorEmail
+                          )
+                        }
                         className="text-[20px] py-2 px-6 m-1 text-white rounded-xl bg-[#ff3811]"
                       >
                         Deleted

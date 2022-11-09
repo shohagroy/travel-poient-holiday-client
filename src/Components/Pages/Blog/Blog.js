@@ -1,8 +1,12 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const Blog = () => {
   return (
     <div className="bg-gray-200">
+      <Helmet>
+        <title>Blog -Travel Point</title>
+      </Helmet>
       <section className="max-w-[1200px] min-h-[700px] m-auto p-5 md:p-20 bg-gray-200 text-gray-900">
         <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">
           <h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl">

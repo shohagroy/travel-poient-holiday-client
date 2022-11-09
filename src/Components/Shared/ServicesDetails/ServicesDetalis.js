@@ -36,7 +36,6 @@ const ServicesDetalis = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.acknowledged && data.insertedId) {
           swal({
             title: "Successful!",
@@ -54,12 +53,9 @@ const ServicesDetalis = () => {
     fetch(`http://localhost:5000/reviews?id=${services._id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setReviews(data);
       });
   }, [reating]);
-
-  console.log(reviews);
 
   return (
     <div>
@@ -73,7 +69,7 @@ const ServicesDetalis = () => {
 
       <div className="bg-gray-200">
         <div className="max-w-[1200px] mx-auto">
-          <div className="mx-2 p-10 ">
+          <div className="mx-2 p-1  md:p-10 ">
             <p className=" text-center text-[#ff3811] mb-10 text-5xl font-bold">
               Service Details
             </p>
@@ -97,13 +93,13 @@ const ServicesDetalis = () => {
                         src={services?.photoURL}
                         alt={services?.author}
                       />
-                      <p className="text-4xl font-bold ml-2">
+                      <p className="text-3xl md:text-4xl font-bold ml-2">
                         {services?.author}
                       </p>
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-4xl font-bold capitalize text-gray-700">
+                    <h3 className="text-3xl md:text-4xl font-bold capitalize text-gray-700">
                       {services?.tittle}
                     </h3>
                     <p className="font-semibold font-bold text-xl capitalize">
@@ -112,7 +108,7 @@ const ServicesDetalis = () => {
                     <p className="font-semibold font-bold text-xl capitalize">
                       Duration: {services?.duration}
                     </p>
-                    <h3 className="text-red-600 font-bold text-5xl">
+                    <h3 className="text-red-600 font-bold text-4xl md:text-5xl">
                       Price: ${services?.price}
                     </h3>
                     <p className="leading-snug font-sans text-xl capitalize text-gray-900">
@@ -124,7 +120,7 @@ const ServicesDetalis = () => {
             </div>
 
             <div>
-              <section className="my-8 bg-white text-gray-900">
+              <section className="md:my-8 my-3 bg-white text-gray-900">
                 <div className="container flex flex-col items-center mx-auto mb-12 md:p-10 md:px-12">
                   <h1 className="p-4 text-4xl font-semibold leading-none text-center">
                     What our Clients are saying about us
@@ -150,7 +146,7 @@ const ServicesDetalis = () => {
                 <p className="text-4xl font-bold text-[#ff3811] font-serif">
                   Please Login <br /> and Review This Service
                 </p>
-                <Link to="/wlkflogin">
+                <Link to="/login">
                   <button className="my-10 py-3 px-8 text-3xl font-bold text-white rounded-md bg-[#ff3811]">
                     Login hare
                   </button>

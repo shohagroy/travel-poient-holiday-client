@@ -1,12 +1,12 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
-import { json, Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 import { Helmet } from "react-helmet";
 
 const Login = () => {
-  const { userLogin, googleSignIn, getJWTAccess } = useContext(AuthProvaider);
+  const { userLogin, googleSignIn } = useContext(AuthProvaider);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,17 +32,11 @@ const Login = () => {
             headers: {
               "content-type": "application/json",
             },
-            body: JSON.stringify({ currentUser }),
+            body: JSON.stringify(currentUser),
           })
-            .then((res) => {
-              console.log(res);
-              return res.json();
-            })
+            .then((res) => res.json())
             .then((data) => {
-              localStorage.setItem(
-                "travel_point_token",
-                JSON.stringify(data.token)
-              );
+              localStorage.setItem("travel_point_token", data.token);
               navigate(path, { relative: true });
             });
         }
@@ -89,9 +83,7 @@ const Login = () => {
             });
         }
       })
-      .catch((error) => {
-        // setLoginError(error.code)
-      });
+      .catch((error) => {});
   };
 
   return (
@@ -144,7 +136,7 @@ const Login = () => {
             Don't have account?
             <Link
               to="../sign-up"
-              className="focus:underline text-blue-400 hover:underline"
+              className="focus:underline text-red-400 hover:underline"
             >
               Sign up here
             </Link>

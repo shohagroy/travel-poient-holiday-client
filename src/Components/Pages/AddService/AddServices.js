@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const AddServices = () => {
-  const { user } = useContext(AuthProvaider);
+  const { user, userSignOut } = useContext(AuthProvaider);
 
   const [addService, setAddService] = useState({});
 
@@ -36,9 +36,10 @@ const AddServices = () => {
       body: JSON.stringify(addService),
     })
       .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          userSignOut();
+        }
         return res.json();
-
-        console.log(res);
       })
       .then((data) => {
         if (data.acknowledged && data.insertedId) {
