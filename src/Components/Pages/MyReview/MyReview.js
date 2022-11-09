@@ -13,8 +13,6 @@ const MyReview = () => {
 
   const { user } = useContext(AuthProvaider);
 
-  console.log(defoultReview);
-
   useEffect(() => {
     fetch(`http://localhost:5000/my-reviews?email=${user.email}`)
       .then((res) => res.json())
@@ -63,7 +61,6 @@ const MyReview = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setDefoultReview("");
         if (data.matchedCount >= 1) {
           swal("Done! Your Review has been Updated!", {
@@ -73,8 +70,6 @@ const MyReview = () => {
           setUpdate(false);
         }
       });
-
-    console.log(updateReview);
   };
 
   const reviewDeletedHandalar = (id) => {
