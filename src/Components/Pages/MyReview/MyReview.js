@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 import swal from "sweetalert";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 const MyReview = () => {
   const [myReview, setMyReview] = useState([]);
@@ -123,11 +124,16 @@ const MyReview = () => {
                     className="flex my-3 justify-between items-center"
                   >
                     <div className="flex items-center">
-                      <img
-                        className="w-[200px] h-[120px] rounded-xl"
-                        src={review.services.image}
-                        alt={review.services.tittle}
-                      />
+                      <PhotoProvider>
+                        <PhotoView src={review.services.image}>
+                          <img
+                            className="w-[200px] h-[120px] rounded-xl"
+                            src={review.services.image}
+                            alt={review.services.tittle}
+                          />
+                        </PhotoView>
+                      </PhotoProvider>
+
                       <div className="ml-4">
                         <div className="text-xl w-[500px] hover:text-red-600 font-semibold ">
                           <Link to={`/services/${review.services._id}`}>

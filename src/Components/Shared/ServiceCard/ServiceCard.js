@@ -25,7 +25,7 @@ const ServiceCard = ({ service }) => {
       <div className="space-y-4">
         <div className="space-y-2">
           <PhotoProvider maskOpacity={0.5}>
-            <PhotoView>
+            <PhotoView src={service?.image}>
               <img
                 src={service?.image}
                 alt=""

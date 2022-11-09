@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { PhotoProvider, PhotoSlider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
@@ -74,11 +75,15 @@ const MyServices = () => {
                     className="flex my-3 justify-between items-center"
                   >
                     <div className="flex items-center">
-                      <img
-                        className="w-[200px] h-[120px] rounded-xl"
-                        src={service.image}
-                        alt={service.tittle}
-                      />
+                      <PhotoProvider maskOpacity={0.5}>
+                        <PhotoView src={service.image}>
+                          <img
+                            className="w-[200px] h-[120px] rounded-xl"
+                            src={service.image}
+                            alt={service.tittle}
+                          />
+                        </PhotoView>
+                      </PhotoProvider>
                       <div className="ml-4">
                         <div className="text-xl w-[500px] hover:text-red-600 font-semibold ">
                           <Link to={`/services/${service._id}`}>
