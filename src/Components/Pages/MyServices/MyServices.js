@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { PhotoProvider, PhotoSlider, PhotoView } from "react-photo-view";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
@@ -65,7 +65,7 @@ const MyServices = () => {
       <div className="max-w-[1200px] mx-auto">
         <div>
           <div className="text-center mb-[30px]">
-            <h2 className="text-[35px] font-bold p-4 text-[#ff3811]">
+            <h2 className="md:text-[35px] text-3xl font-bold p-4 text-[#ff3811]">
               Total Service:
               <span className="text-red-600 text-4xl">{myService?.length}</span>
             </h2>
@@ -76,20 +76,20 @@ const MyServices = () => {
                 {myService.map((service) => (
                   <div
                     key={service._id}
-                    className="flex my-3 justify-between items-center"
+                    className="md:flex my-3 mx-2 justify-between items-center"
                   >
-                    <div className="flex items-center">
+                    <div className="md:flex items-center">
                       <PhotoProvider maskOpacity={0.5}>
                         <PhotoView src={service.image}>
                           <img
-                            className="w-[200px] h-[120px] rounded-xl"
+                            className="md:w-[200px] object-cover md:h-[120px] rounded-xl"
                             src={service.image}
                             alt={service.tittle}
                           />
                         </PhotoView>
                       </PhotoProvider>
                       <div className="ml-4">
-                        <div className="text-xl w-[500px] hover:text-red-600 font-semibold ">
+                        <div className="text-xl md:w-[500px] hover:text-red-600 font-semibold ">
                           <Link to={`/services/${service._id}`}>
                             <span>{service.tittle}</span>
                           </Link>

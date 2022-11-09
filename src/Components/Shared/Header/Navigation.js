@@ -97,19 +97,64 @@ const Navigation = () => {
       </nav>
 
       {/* small screen  */}
-      <div className="absolute w-full font-semibold">
+      <div className="absolute w-full z-50 font-semibold">
         <div
           onClick={() => setMenu(!menu)}
-          className={`flex justify-end flex-col items-end bg-red-200 ${
+          className={`flex justify-end mt-5 flex-col items-center w-full ${
             menu ? "block" : "hidden"
           }`}
         >
-          <NavLink className={`p-2 mx-2`} to="/">
+          <NavLink
+            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center`}
+            to="/"
+          >
             Home
           </NavLink>
-          <NavLink className={`p-2 mx-2`}>Shop</NavLink>
-          <NavLink className={`p-2 mx-2`}>About</NavLink>
-          <NavLink className={`p-2 mx-2`}>Contact</NavLink>
+          <NavLink
+            to="/services"
+            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center`}
+          >
+            Services
+          </NavLink>
+          <NavLink
+            to="/add-service"
+            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center ${
+              !user.email ? "hidden" : "inline"
+            }`}
+          >
+            Add Service
+          </NavLink>
+          <NavLink
+            to="/my-review"
+            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center ${
+              !user.email ? "hidden" : "inline"
+            }`}
+          >
+            My Review
+          </NavLink>
+          <NavLink
+            to="/blog"
+            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center`}
+          >
+            Blog
+          </NavLink>
+
+          <NavLink
+            to="/login"
+            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center ${
+              user.email ? "hidden" : "inline"
+            }`}
+          >
+            Login
+          </NavLink>
+          <button
+            onClick={userSignOut}
+            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full  ${
+              !user.email ? "hidden" : "inline"
+            }`}
+          >
+            Log Out
+          </button>
         </div>
       </div>
     </div>

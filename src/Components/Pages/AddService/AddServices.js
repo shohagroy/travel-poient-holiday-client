@@ -69,14 +69,14 @@ const AddServices = () => {
 
       <div className="bg-gray-200">
         <div className="max-w-[1200px] mx-auto">
-          <div className="mx-2 p-10 ">
-            <p className=" text-center text-[#ff3811] mb-10 text-5xl font-bold">
+          <div className="p-2 mx:mx-2 md:p-10 ">
+            <p className=" text-center text-[#ff3811] mb-4 text-3xl md:mb-10 md:text-5xl font-bold">
               Add New Service
             </p>
 
             <div className="text-center">
               <Link to="/my-services" className="text-center">
-                <button className=" text-3xl py-3 bg-red-600 text-white font-bold rounded-xl px-8">
+                <button className=" md:text-3xl md:py-3 text-xl p-2 bg-red-600 text-white font-bold rounded-xl px-8">
                   My Service
                 </button>
               </Link>

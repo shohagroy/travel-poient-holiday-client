@@ -114,9 +114,11 @@ const MyReview = () => {
       <div className="max-w-[1200px] mx-auto">
         <div>
           <div className="text-center mb-[30px]">
-            <h2 className="text-[35px] font-bold p-4 text-[#ff3811]">
+            <h2 className=" text-3xl md:text-[35px] font-bold p-4 text-[#ff3811]">
               Total Review:
-              <span className="text-red-600 text-4xl">{myReview?.length}</span>
+              <span className="text-red-600  md:text-4xl">
+                {myReview?.length}
+              </span>
             </h2>
           </div>
           <div>
@@ -125,13 +127,13 @@ const MyReview = () => {
                 {myReview.map((review) => (
                   <div
                     key={review._id}
-                    className="flex my-3 justify-between items-center"
+                    className="md:flex my-3 justify-between items-center"
                   >
-                    <div className="flex items-center">
+                    <div className="md:flex items-center p-2">
                       <PhotoProvider>
                         <PhotoView src={review.services.image}>
                           <img
-                            className="w-[200px] h-[120px] rounded-xl"
+                            className="md:w-[200px] md:h-[120px] object-cover rounded-xl"
                             src={review.services.image}
                             alt={review.services.tittle}
                           />
@@ -139,7 +141,7 @@ const MyReview = () => {
                       </PhotoProvider>
 
                       <div className="ml-4">
-                        <div className="text-xl w-[500px] hover:text-red-600 font-semibold ">
+                        <div className="text-xl md:w-[500px] hover:text-red-600 font-semibold ">
                           <Link to={`/services/${review.services._id}`}>
                             <span>{review.services.tittle}</span>
                           </Link>

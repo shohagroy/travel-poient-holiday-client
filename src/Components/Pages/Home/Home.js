@@ -28,13 +28,15 @@ const Home = () => {
       {/* facilitys section  */}
       <div className="bg-gray-200">
         <div className="max-w-[1200px] mx-auto py-10 text-center">
-          <p className="text-3xl font-semibold">Travel Poinet Holiday</p>
-          <h1 className="text-6xl font-bold my-2 font-serif">
+          <p className="text-3xl text-red-600 font-semibold">
+            Travel Poinet Holiday
+          </p>
+          <h1 className="text-4xl md:text-5xl font-bold my-2 font-serif">
             Why Travel with Travel Point?
           </h1>
 
           {/* facilitys card  */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mx-2">
+          <div className="flex justify-center flex-col items-center md:grid md:grid-cols-4 md:gap-4 ">
             <FacilityCard
               text={"2000+ Our Worldwide Guide"}
               images={
@@ -65,14 +67,16 @@ const Home = () => {
 
       {/* about section  */}
       <div className="max-w-[1200px] mx-auto">
-        <div className="mx-2 grid grid-cols-2 gap-4 p-10 ">
-          <div></div>
+        <div className="mx-2 grid md:grid-cols-2 gap-4 p-10 ">
           <div>
-            <p className=" text-center text-3xl font-semibold">
+            <img src="https://pixner.net/travula/image/contact-bg.png" alt="" />
+          </div>
+          <div>
+            <p className=" text-center text-3xl text-red-600 font-semibold">
               About Travel Poient
             </p>
-            <h1 className="py-5 text-6xl font-bold">
-              Beat Travel Agency Company Since 2014.
+            <h1 className="py-5 text-4xl md:text-5xl font-bold text-center md:text-left">
+              Worlds Most Popular Travel Agency Company Since 2014.
             </h1>
             <p>
               The Travel Point Holiday is full service Tour Operator &
@@ -97,7 +101,7 @@ const Home = () => {
             </h3>
 
             {/* card section  */}
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid md:grid-cols-3 gap-2">
               {/* card  */}
               {services.map((service) => (
                 <ServiceCard service={service} key={service._id} />
@@ -122,8 +126,8 @@ const Home = () => {
           src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/deals-1.jpg"
           alt=""
         />
-        <div className=" absolute top-0 w-full h-full bg-gradient-to-r from-blue-600/70 to-blue/0"></div>
-        <div className="absolute top-1/3 left-28 bg-white rounded-xl ">
+        <div className=" absolute top-0  w-full h-full bg-gradient-to-r from-blue-600/70 to-blue/0"></div>
+        <div className="absolute top-1/3 md:left-[28px] mx-2  bg-white rounded-xl ">
           <div className="p-10 w-[350px]">
             <h1 className=" text-3xl font-bold">
               Darjeeling, Jammu and Kashmir
@@ -142,9 +146,9 @@ const Home = () => {
 
       {/* subscribe section  */}
       <div className="">
-        <div className="w-full bg-gray-500">
+        <div className="w-full bg-gray-200">
           <div className="max-w-[800px] mx-auto  p-4 py-20">
-            <h1 className="text-5xl font-bold text-center text-gray-100">
+            <h1 className="text-3xl text-red-600 md:text-5xl font-bold text-center text-gray-100">
               Subcribe To More Update
             </h1>
 
