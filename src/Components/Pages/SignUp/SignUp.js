@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
   const { createUserWithEmail, userProfileUpdate } = useContext(AuthProvaider);
@@ -41,6 +42,9 @@ const SignUp = () => {
 
   return (
     <div className="flex justify-center">
+      <Helmet>
+        <title>Sign Up - Travel Point</title>
+      </Helmet>
       <div className="w-full max-w-md p-4  sm:p-8 text-gray-900">
         <h2 className="mb-5 text-3xl font-bold text-center">Sign Up</h2>
 

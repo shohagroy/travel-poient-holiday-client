@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { json, Link, useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const { userLogin, googleSignIn, getJWTAccess } = useContext(AuthProvaider);
@@ -95,6 +96,9 @@ const Login = () => {
 
   return (
     <div className="flex justify-center">
+      <Helmet>
+        <title>Login - Travel Point</title>
+      </Helmet>
       <div className="w-full max-w-md p-4  sm:p-8 text-gray-900">
         <h2 className="mb-5 text-3xl font-bold text-center">
           Login to your account

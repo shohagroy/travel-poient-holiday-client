@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const AddServices = () => {
   const { user } = useContext(AuthProvaider);
@@ -55,6 +56,9 @@ const AddServices = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Add New Service</title>
+      </Helmet>
       <div className="h-[400px] relative">
         <img
           className="object-cover w-full h-full object-contain"

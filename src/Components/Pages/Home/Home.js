@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ServiceCard from "../../Shared/ServiceCard/ServiceCard";
 import FacilityCard from "./FacilityCard";
 import ImageSlider from "./ImageSlider";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -16,6 +17,9 @@ const Home = () => {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Travel Point Holiday</title>
+      </Helmet>
       {/* banar section  */}
       <div className=" w-full">
         <ImageSlider />

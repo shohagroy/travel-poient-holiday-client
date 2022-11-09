@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 import swal from "sweetalert";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { Helmet } from "react-helmet";
 
 const MyReview = () => {
   const [myReview, setMyReview] = useState([]);
@@ -99,6 +100,9 @@ const MyReview = () => {
 
   return (
     <div className="relative">
+      <Helmet>
+        <title>My Review - Travel Point</title>
+      </Helmet>
       <div className="h-[400px] relative">
         <img
           className="object-cover w-full h-full object-contain"

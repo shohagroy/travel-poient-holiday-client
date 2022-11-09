@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import React from "react";
+import { useLoaderData } from "react-router-dom";
 import ServiceCard from "../../Shared/ServiceCard/ServiceCard";
+import { Helmet } from "react-helmet";
 
 const Services = () => {
-  // const [services, setSetvices] = useState([]);
-
   const services = useLoaderData();
-
-  console.log(services);
 
   return (
     <div>
+      <Helmet>
+        <title>Service - Travel Point</title>
+      </Helmet>
       <div className="h-[400px] relative">
         <img
           className="object-cover w-full h-full object-contain"
