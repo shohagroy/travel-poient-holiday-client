@@ -95,7 +95,7 @@ const Home = () => {
       {/* our service section  */}
       <div className="bg-gray-200">
         <div className="max-w-[1200px] mx-auto">
-          <div className="mx-2 p-10 ">
+          <div className="mx-2 p-3 md:p-10 ">
             <h3 className=" text-center text-5xl my-10 font-semibold">
               Our Services
             </h3>
