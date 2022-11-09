@@ -27,7 +27,7 @@ const Login = () => {
           const currentUser = {
             email: user.email,
           };
-          fetch("http://localhost:5000/jwt", {
+          fetch("https://travel-poient-holiday-server.vercel.app/jwt", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -63,7 +63,7 @@ const Login = () => {
           const currentUser = {
             email: user.email,
           };
-          fetch("http://localhost:5000/jwt", {
+          fetch("https://travel-poient-holiday-server.vercel.app/jwt", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -75,10 +75,7 @@ const Login = () => {
               return res.json();
             })
             .then((data) => {
-              localStorage.setItem(
-                "travel_point_token",
-                JSON.stringify(data.token)
-              );
+              localStorage.setItem("travel_point_token", data.token);
               navigate(path, { relative: true });
             });
         }
@@ -89,7 +86,7 @@ const Login = () => {
   return (
     <div className="flex justify-center">
       <Helmet>
-        <title>Login - Travel Point</title>
+        <title>Login - Travel Point Holiday</title>
       </Helmet>
       <div className="w-full max-w-md p-4  sm:p-8 text-gray-900">
         <h2 className="mb-5 text-3xl font-bold text-center">

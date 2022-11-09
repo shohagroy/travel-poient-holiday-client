@@ -27,7 +27,7 @@ const AddServices = () => {
   const addServiceHandelar = (event) => {
     event.preventDefault();
 
-    fetch("http://localhost:5000/service", {
+    fetch("https://travel-poient-holiday-server.vercel.app/service", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -58,7 +58,7 @@ const AddServices = () => {
   return (
     <div>
       <Helmet>
-        <title>Add New Service</title>
+        <title>Add New Service - Travel Point Holiday</title>
       </Helmet>
       <div className="h-[400px] relative">
         <img

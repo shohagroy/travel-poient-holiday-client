@@ -97,28 +97,28 @@ const Navigation = () => {
       </nav>
 
       {/* small screen  */}
-      <div className="absolute w-full z-50 font-semibold">
+      <div className="absolute w-full  z-50 font-semibold">
         <div
           onClick={() => setMenu(!menu)}
-          className={`flex justify-end mt-5 flex-col items-center w-full ${
+          className={`flex justify-end py-5  bg-black/50 flex-col items-center w-full ${
             menu ? "block" : "hidden"
           }`}
         >
           <NavLink
-            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center`}
+            className={`py-4 text-3xl m-2  text-white w-full text-center`}
             to="/"
           >
             Home
           </NavLink>
           <NavLink
             to="/services"
-            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center`}
+            className={`py-4 text-3xl m-2  text-white w-full text-center`}
           >
             Services
           </NavLink>
           <NavLink
             to="/add-service"
-            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center ${
+            className={`py-4 text-3xl m-2  text-white w-full text-center ${
               !user.email ? "hidden" : "inline"
             }`}
           >
@@ -126,7 +126,7 @@ const Navigation = () => {
           </NavLink>
           <NavLink
             to="/my-review"
-            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center ${
+            className={`py-4 text-3xl m-2  text-white w-full text-center ${
               !user.email ? "hidden" : "inline"
             }`}
           >
@@ -134,14 +134,14 @@ const Navigation = () => {
           </NavLink>
           <NavLink
             to="/blog"
-            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center`}
+            className={`py-4 text-3xl m-2  text-white w-full text-center`}
           >
             Blog
           </NavLink>
 
           <NavLink
             to="/login"
-            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full text-center ${
+            className={`py-4 text-3xl m-2  text-white w-full text-center ${
               user.email ? "hidden" : "inline"
             }`}
           >
@@ -149,7 +149,7 @@ const Navigation = () => {
           </NavLink>
           <button
             onClick={userSignOut}
-            className={`p-3 text-2xl m-2 bg-black/20 text-white w-full  ${
+            className={`py-4 text-3xl m-2  text-white w-full  ${
               !user.email ? "hidden" : "inline"
             }`}
           >

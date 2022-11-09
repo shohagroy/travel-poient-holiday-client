@@ -12,11 +12,14 @@ const MyServices = () => {
   const { user, userSignOut } = useContext(AuthProvaider);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/my-services?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("travel_point_token")}`,
-      },
-    })
+    fetch(
+      `https://travel-poient-holiday-server.vercel.app/my-services?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("travel_point_token")}`,
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 401 || res.status === 403) {
           userSignOut();
@@ -38,14 +41,17 @@ const MyServices = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/my-services?_id=${id}&email=${email}`, {
-          method: "DELETE",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem(
-              "travel_point_token"
-            )}`,
-          },
-        })
+        fetch(
+          `https://travel-poient-holiday-server.vercel.app/my-services?_id=${id}&email=${email}`,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem(
+                "travel_point_token"
+              )}`,
+            },
+          }
+        )
           .then((res) => {
             if (res.status === 401 || res.status === 403) {
               userSignOut();

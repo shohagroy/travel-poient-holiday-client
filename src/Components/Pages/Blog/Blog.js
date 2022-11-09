@@ -5,7 +5,7 @@ const Blog = () => {
   return (
     <div className="bg-gray-200">
       <Helmet>
-        <title>Blog -Travel Point</title>
+        <title>Blog -Travel Point Holiday</title>
       </Helmet>
       <section className="max-w-[1200px] min-h-[700px] m-auto p-5 md:p-20 bg-gray-200 text-gray-900">
         <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">

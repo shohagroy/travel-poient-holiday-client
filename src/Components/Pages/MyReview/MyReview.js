@@ -16,11 +16,14 @@ const MyReview = () => {
   const { user, userSignOut } = useContext(AuthProvaider);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/my-reviews?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("travel_point_token")}`,
-      },
-    })
+    fetch(
+      `https://travel-poient-holiday-server.vercel.app/my-reviews?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("travel_point_token")}`,
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 401 || res.status === 403) {
           userSignOut();
@@ -31,7 +34,6 @@ const MyReview = () => {
   }, [deleted, update]);
 
   const reviewUpdateHandelar = (review) => {
-    console.log(review);
     setUpdateReviewId("");
     swal({
       title: "Are you sure?",
@@ -62,7 +64,7 @@ const MyReview = () => {
     };
 
     fetch(
-      `http://localhost:5000/my-reviews?_id=${updateReviewId.id}&email=${updateReviewId.email}`,
+      `https://travel-poient-holiday-server.vercel.app/my-reviews?_id=${updateReviewId.id}&email=${updateReviewId.email}`,
       {
         method: "PUT",
         headers: {
@@ -99,15 +101,18 @@ const MyReview = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/my-reviews?_id=${id}&email=${email}`, {
-          method: "DELETE",
-          headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem(
-              "travel_point_token"
-            )}`,
-          },
-        })
+        fetch(
+          `https://travel-poient-holiday-server.vercel.app/my-reviews?_id=${id}&email=${email}`,
+          {
+            method: "DELETE",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem(
+                "travel_point_token"
+              )}`,
+            },
+          }
+        )
           .then((res) => {
             if (res.status === 401 || res.status === 403) {
               userSignOut();
@@ -131,7 +136,7 @@ const MyReview = () => {
   return (
     <div className="relative">
       <Helmet>
-        <title>My Review - Travel Point</title>
+        <title>My Review - Travel Point Holiday</title>
       </Helmet>
       <div className="h-[400px] relative">
         <img

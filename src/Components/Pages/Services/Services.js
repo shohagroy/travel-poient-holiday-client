@@ -9,7 +9,7 @@ const Services = () => {
   return (
     <div>
       <Helmet>
-        <title>Service - Travel Point</title>
+        <title>Service - Travel Point Holiday</title>
       </Helmet>
       <div className="h-[400px] relative">
         <img

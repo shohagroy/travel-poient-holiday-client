@@ -9,7 +9,7 @@ const Home = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/home")
+    fetch("https://travel-poient-holiday-server.vercel.app/home")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);
@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>Travel Point Holiday</title>
+        <title>Wellcone to Travel Point Holiday</title>
       </Helmet>
       {/* banar section  */}
       <div className=" w-full">
@@ -149,7 +149,7 @@ const Home = () => {
         <div className="w-full bg-gray-200">
           <div className="max-w-[800px] mx-auto  p-4 py-20">
             <h1 className="text-3xl text-red-600 md:text-5xl font-bold text-center text-gray-100">
-              Subcribe To More Update
+              Subcribe To Get Update
             </h1>
 
             <div className="flex justify-center items-center my-5 w-full">

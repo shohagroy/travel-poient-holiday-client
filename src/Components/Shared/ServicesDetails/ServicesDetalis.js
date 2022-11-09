@@ -27,7 +27,7 @@ const ServicesDetalis = () => {
       email: user.email,
     };
 
-    fetch("http://localhost:5000/review", {
+    fetch("https://travel-poient-holiday-server.vercel.app/review", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -50,7 +50,9 @@ const ServicesDetalis = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?id=${services._id}`)
+    fetch(
+      `https://travel-poient-holiday-server.vercel.app/reviews?id=${services._id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
@@ -70,13 +72,13 @@ const ServicesDetalis = () => {
       <div className="bg-gray-200">
         <div className="max-w-[1200px] mx-auto">
           <div className="mx-2 p-1  md:p-10 ">
-            <p className=" text-center text-[#ff3811] mb-10 text-5xl font-bold">
+            <p className=" text-center text-[#ff3811] m-5 md:mb-10 text-3xl md:text-5xl font-bold">
               Service Details
             </p>
 
             {/* card  */}
             <div className="my-10">
-              <div className="p-4 shadow-md bg-gray-300 text-gray-900">
+              <div className="p-4 shadow-md bg-white text-gray-900">
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <img
@@ -93,7 +95,7 @@ const ServicesDetalis = () => {
                         src={services?.photoURL}
                         alt={services?.author}
                       />
-                      <p className="text-3xl md:text-4xl font-bold ml-2">
+                      <p className="text-2xl md:text-4xl  font-bold ml-2">
                         {services?.author}
                       </p>
                     </div>

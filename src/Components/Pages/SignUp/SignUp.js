@@ -3,9 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthProvaider } from "../../GlobalContext/GobalContext";
 import { Helmet } from "react-helmet";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const SignUp = () => {
-  const { createUserWithEmail, userProfileUpdate } = useContext(AuthProvaider);
+  const { createUserWithEmail, userProfileUpdate, googleSignIn } =
+    useContext(AuthProvaider);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,29 +23,84 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    createUserWithEmail(email, password)
-      .then((result) => {
-        // Signed in
-        const user = result.user;
-        if (user) {
-          navigate(path, { relative: true });
-          userProfileUpdate(name, photoUrl);
+    const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])").test(
+      password
+    );
+
+    if (strongRegex) {
+      createUserWithEmail(email, password)
+        .then((result) => {
+          // Signed in
+          const user = result.user;
+          if (user.email) {
+            userProfileUpdate(name, photoUrl);
+            const currentUser = {
+              email: user.email,
+            };
+            fetch("https://travel-poient-holiday-server.vercel.app/jwt", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(currentUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                localStorage.setItem("travel_point_token", data.token);
+                navigate(path, { relative: true });
+              });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          const massege = error.code.split("/")[1];
+          swal({
+            title: massege,
+            icon: "error",
+          });
+        });
+    } else {
+      swal({
+        title: "Please Provaid a Strong Password!",
+        icon: "error",
+      });
+    }
+  };
+
+  const provaider = new GoogleAuthProvider();
+  const googleLoginHandelar = () => {
+    googleSignIn(provaider)
+      .then((res) => {
+        const user = res.user;
+
+        if (user.email) {
+          const currentUser = {
+            email: user.email,
+          };
+          fetch("https://travel-poient-holiday-server.vercel.app/jwt", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(currentUser),
+          })
+            .then((res) => {
+              console.log(res);
+              return res.json();
+            })
+            .then((data) => {
+              localStorage.setItem("travel_point_token", data.token);
+              navigate(path, { relative: true });
+            });
         }
       })
-      .catch((error) => {
-        console.log(error);
-        const massege = error.code.split("/")[1];
-        swal({
-          title: massege,
-          icon: "error",
-        });
-      });
+      .catch((error) => {});
   };
 
   return (
     <div className="flex justify-center">
       <Helmet>
-        <title>Sign Up - Travel Point</title>
+        <title>Sign Up - Travel Point Holiday</title>
       </Helmet>
       <div className="w-full max-w-md p-4  sm:p-8 text-gray-900">
         <h2 className="mb-5 text-3xl font-bold text-center">Sign Up</h2>
@@ -54,9 +111,7 @@ const SignUp = () => {
         >
           <div className="space-y-4">
             <div className="space-y-2">
-              <label for="name" className="block text-sm">
-                Your Name
-              </label>
+              <label className="block text-sm">Your Name</label>
               <input
                 type="text"
                 name="name"
@@ -66,9 +121,7 @@ const SignUp = () => {
               />
             </div>
             <div className="space-y-2">
-              <label for="photo" className="block text-sm">
-                Photo Url
-              </label>
+              <label className="block text-sm">Photo Url</label>
               <input
                 type="text"
                 name="photo"
@@ -78,9 +131,7 @@ const SignUp = () => {
               />
             </div>
             <div className="space-y-2">
-              <label for="email" className="block text-sm">
-                Email address
-              </label>
+              <label className="block text-sm">Email address</label>
               <input
                 type="email"
                 name="email"
@@ -91,9 +142,7 @@ const SignUp = () => {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <label for="password" className="text-sm">
-                  Password
-                </label>
+                <label className="text-sm">Password</label>
               </div>
               <input
                 type="password"
@@ -130,6 +179,7 @@ const SignUp = () => {
 
         <div className="my-6 space-y-4">
           <button
+            onClick={googleLoginHandelar}
             aria-label="Login with Google"
             type="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-400 focus:ring-violet-400"
@@ -139,9 +189,9 @@ const SignUp = () => {
               viewBox="0 0 32 32"
               className="w-5 h-5 fill-red-600"
             >
-              <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0F 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
+              <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
             </svg>
-            <p className="text-red-600 font-semibold">Login with Google</p>
+            <p className="text-red-600 font-bold">Login with Google</p>
           </button>
         </div>
       </div>
