@@ -1,7 +1,7 @@
 # Getting Start Travel Point Holiday.
 
 Live Website Link : [Travel Point Holiday](https://travel-point-holiday.web.app/).
-server link : [server])(https://travel-poient-holiday-server.vercel.app/)
+server link : [server])(https://travel-poient-holiday-server.vercel.app/).
 
 # How do you install this project in your local folder..
 
