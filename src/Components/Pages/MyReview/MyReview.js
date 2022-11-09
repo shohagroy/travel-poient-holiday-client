@@ -33,9 +33,6 @@ const MyReview = () => {
         setUserReating(reating);
         setDeleteReviewId(id);
         setDefoultReview(review);
-        // swal("Done! Your Order has been deleted!", {
-        //   icon: "success",
-        // });
       } else {
         swal("Your Order is safe!");
       }
@@ -104,7 +101,7 @@ const MyReview = () => {
       <div className="h-[400px] relative">
         <img
           className="object-cover w-full h-full object-contain"
-          src="https://i.ibb.co/9vCkKc0/bangladesh-3535023-1920.jpg"
+          src="https://i.ibb.co/v1yPmjS/nature-3676693-1920.jpg"
           alt="banar image"
         />
       </div>

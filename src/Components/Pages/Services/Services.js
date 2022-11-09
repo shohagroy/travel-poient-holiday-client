@@ -40,14 +40,6 @@ const Services = () => {
                 ))}
               </div>
             </div>
-            <div className="my-10 text-center">
-              <button
-                onClick={() => console.log("button click")}
-                className="py-3 px-6 bg-red-600 font-semibold text-xl text-white "
-              >
-                See All Services
-              </button>
-            </div>
           </div>
         </div>
       </div>

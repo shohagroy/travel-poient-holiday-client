@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ServiceCard from "../../Shared/ServiceCard/ServiceCard";
 import FacilityCard from "./FacilityCard";
+import ImageSlider from "./ImageSlider";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -16,7 +17,9 @@ const Home = () => {
   return (
     <div>
       {/* banar section  */}
-      <div className="h-[500px] w-full bg-red-200"></div>
+      <div className=" w-full">
+        <ImageSlider />
+      </div>
 
       {/* facilitys section  */}
       <div className="bg-gray-200">

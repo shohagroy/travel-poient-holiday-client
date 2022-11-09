@@ -52,7 +52,7 @@ const MyServices = () => {
       <div className="h-[400px] relative">
         <img
           className="object-cover w-full h-full object-contain"
-          src="https://i.ibb.co/9vCkKc0/bangladesh-3535023-1920.jpg"
+          src="https://i.ibb.co/JFRbYtS/sea-3243357-1920.jpg"
           alt="banar image"
         />
       </div>
