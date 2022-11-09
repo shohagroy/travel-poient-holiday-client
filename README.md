@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Getting Start Travel Point Holiday.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live Website Link : [Travel Point Holiday](https://travel-point-holiday.web.app/).
+server link : [server])(https://travel-poient-holiday-server.vercel.app/)
 
-## Available Scripts
+# How do you install this project in your local folder..
 
-In the project directory, you can run:
+1. First you clone the repo to your PC, then install all the required components.
+This project is built with React components.
 
-### `npm start`
+## React components.
+1. react
+2. firebase
+3. react-router-dom
+4. react-scripts
+5. json web token (JWT)
+6. sweetalert
+7. react healmet
+8. mongodb
+# Feather of this web Application:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- ### `header section and navigation`
+1. First of this website comes home page. navigation bar share many pages. navigation menu fully responsive desktop and mobile devices.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- ### `hero section`
+2. Hero section is below the navigation bar. Hero section is also responsive. Hero section just simple a image slider many images on this slider
 
-### `npm test`
+- ### `Home page`
+3. Home page have many section, Our exparince, about, 3 service card, winter offer, subscribe section and footer all component aslo response
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ### `service route`
 
-### `npm run build`
+4. service route have our all service. service card have see details button. after click this button chande route, show all detailes route. all details route have this service full details. and also 3 2 route. review and make review section. review section show all client review this service. and below have make review section. create review show after user login. if user not login make review section hide and show a text just login and login button hare. after user click login button, show login route and login and sign up button show this route.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ### `my review`
+5. after use login show my review add service and log out button on navbar. user click my review button show dynamic route and show review card. review update and delete button hare. user click delete button open aleart buse click ok so this review deleted on database. same update use click update button open modal and user change this review
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- ### `add service`
+6. after user login show add service button on navbar also. user click this button. change route show make service from. after user fill thsi from and click add button this service add on database and show this website. this section my service button hare. user click my service button. then show use added service on list. delete button hare. if use click delete button open aleart to say use. use click ok button this service deleted.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- ### `add service`
+7. navbar aslo a button named blog, simple this section. just 4 question and this service.  overal this website fully dynamic.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- ### `footer section`
+After that we have our footer section, the footer section is designed in a simple way, there is a little information about the company name.
 
-## Learn More
+-### `json web token jwt`
+this application use private route and json web token (jws). 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This application is simple web application. I try to give every functon here. You are premium fill in this application.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Finally, thank you for being with me so far.
 
-### Code Splitting
+## 🚀 Follow Me
+[Facebook](https://www.facebook.com/shohagroy.7771/)  [GitHub](https://github.com/shohagroy)  [Skypee](https://www.skypee.com)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
