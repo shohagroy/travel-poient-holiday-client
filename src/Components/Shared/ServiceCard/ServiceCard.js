@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
   return (
-    <div className=" p-4 my-5 shadow-md h-[650px] relative bg-white text-gray-900">
+    <div className=" p-4 my-5 shadow-md h-[700px] relative bg-white text-gray-900">
       <div className="flex justify-between pb-4 border-bottom">
         <div className="flex space-x-4">
           <img
@@ -42,7 +42,7 @@ const ServiceCard = ({ service }) => {
             <i className="fa-regular text-yellow-500 fa-star"></i>
           </div>
           <div className="text-xl font-bold flex justify-between items-center">
-            <p>Thailand</p>
+            <p>{service?.category}</p>
             <h2>
               Price: ${service?.price}/{service?.duration} Days
             </h2>

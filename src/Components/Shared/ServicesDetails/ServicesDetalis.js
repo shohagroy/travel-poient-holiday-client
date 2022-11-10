@@ -108,7 +108,7 @@ const ServicesDetalis = () => {
                       Category: {services?.category}
                     </p>
                     <p className="font-semibold font-bold text-xl capitalize">
-                      Duration: {services?.duration}
+                      Duration: {services?.duration} Days
                     </p>
                     <h3 className="text-red-600 font-bold text-4xl md:text-5xl">
                       Price: ${services?.price}
